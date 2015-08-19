@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+  		<title>Tic Tac Toe</title>
+   		<link rel="stylesheet" type="text/css" href="tictactoe.css">
+   		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cabin+Sketch:400,700">
+   		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Indie+Flower">
+	</head>
+	<body>
+		<h1>Tic Tac Toe</h1>
+		
+		<div class="wrapper">
+            <div class="gameboard">
+				
+					<div class="row1">
+						<!--&nbsp creates a non-breaking space-->
+			  			<div class="cell" id="cell-1x1">&nbsp;</div>
+			  			<div class="cell" id="cell-1x2">&nbsp;</div>
+			  			<div class="cell" id="cell-1x3">&nbsp;</div>
+					</div>
+
+					<div class="row2">
+						<!--&nbsp creates a non-breaking space-->
+			  			<div class="cell" id="cell-2x1">&nbsp;</div>
+			  			<div class="cell" id="cell-2x2">&nbsp;</div>
+			  			<div class="cell" id="cell-2x3">&nbsp;</div>
+					</div>
+
+					<div class="row3">
+						<!--&nbsp creates a non-breaking space-->
+			  			<div class="cell" id="cell-3x1">&nbsp;</div>
+			  			<div class="cell" id="cell-3x2">&nbsp;</div>
+			  			<div class="cell" id="cell-3x3">&nbsp;</div>
+					</div>
+			</div>	
+
+			<div id="scoreboard">
+		        <ul>
+		            <li>X: <span id="score_x"></span></li>
+		            <li>Ties: <span id="score_tie"></span></li>
+		            <li>O: <span id="score_o"></span></li>
+		        </ul>
+    		</div>
+
+			<div class="input-prepend input-append">
+
+	          	<span class="add-on win_text">X won</span>
+
+	          	<strong id="x_win" class="win_times add-on">0</strong>
+
+	          	<span class="add-on">time(s)</span>
+
+        	</div>
+
+			<div class="button">
+
+            <button>New Game</button>
+            <button>End Game</button>
+
+            <link href= "tictactoe.css">
+		</div>
+		
+		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript" src="tictactoe.js"></script>
+	</body>
+</html>
+
