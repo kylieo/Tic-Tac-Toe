@@ -10,21 +10,15 @@ h1 {
     text-align: center;
     font-family: 'Cabin Sketch', cursive;
 	color:white;
-	font-size: 60;
+	font-size: 80px;
+    padding-bottom: 20px;
 }
 
 
 body {
-    background-image: url("http://www.staceybess.com/gfx/bg-chalkboard.jpg");
+    background-image: url(bg-chalkboard.jpg);
     background-size: cover;
 }
-
-
-#chalk {
-    position: absolute;
-    z-index: -1;
-}
-
 
 .gameboard {
     width: 328px;
@@ -36,7 +30,6 @@ body {
 .wrapper {
     width: 330px;
     margin:0 auto;
-
 }
 
 .button {
@@ -60,13 +53,11 @@ p {
 
 .row1, .row2, .row3 {
     clear:both;
-
 }
 
 #cell-1x1,#cell-1x2,#cell-1x4,#cell-1x5 {
     border-right: 8px solid white;
     border-bottom: 8px solid white;
-    border-style: eraser;
     text-align: center;
 }
 
@@ -126,7 +117,7 @@ p {
 }
 
 #cell-2x2 {
-width:100px;
+    width:100px;
     height:100px;
     float: left;
     text-align: center;
@@ -160,14 +151,3 @@ width:100px;
     text-align: center;
 }
 
-.input-prepend span.pre_text {
-	width:55px;
-}
-
-.input-prepend .span1 {
-	width:93px;
-}
-
-.input-prepend {
-	margin-bottom:10px;
-}

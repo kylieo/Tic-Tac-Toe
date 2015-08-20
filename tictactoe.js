@@ -1,202 +1,141 @@
-// if playerName = true // replace html on scoreboard
-// line through winning row
-// different chalk font for scoreboard
-// if tile is in use else
-/*    {
-        window.alert("Tile is in use. Please select another tile."); */
-// text-decoration:line-through;
+
+// ___________.__         ___________               ___________            
+// \__    ___/|__| ____   \__    ___/____    ____   \__    ___/___   ____  
+//   |    |   |  |/ ___\    |    |  \__  \ _/ ___\    |    | /  _ \_/ __ \ 
+//   |    |   |  \  \___    |    |   / __ \\  \___    |    |(  <_> )  ___/ 
+//   |____|   |__|\___  >   |____|  (____  /\___  >   |____| \____/ \___  >
+//                    \/                 \/     \/                      \/ 
 
 
 
-// This object looks after all the logic:
-var clicker = {
-
-  count: 0, // Here we store the "state", initially 0
-
-  // bumpCount knows how to increment and update the screen
-  bumpCount: function () {
-    clicker.count += 1;
-    $('#clicks').text(clicker.count + ' clicks');
-  },
-  
-  // init attaches event handlers once the browser is ready
-  init: function () {
-    $('#clicker').on('click', this.bumpCount);
-  }
-};
-
-// The only thing waiting for the DOM is .init();
-$(document).ready(function () {
-  clicker.init();
-});
-
-//
-
-// If not x or o allow a square to be clicked.
-
-//
 
 
-var playerTurn = 2
+//if it is divisable by 2 it is O
+var playerTurn = 2;
 
-var takeTurn = function () {
-	if (playerTurn % 2 === 0) {
-		$(this).html('<p>0</p>');
-	} else {
-		$(this).html('<p>X</p>');
-	} 
+//Initialise the game board when the window loads
+window.onload = init;
+
+// Initialize the game
+function init() {
+   resetBoard();
+   document.getElementsByClassName("btnNewGame").onclick = resetBoard;
+}
+
+// Resets the board
+function resetBoard(){
+
+	$(".cell").html("&nbsp");
+	$(".cell").click(play);	
+
+}
+
+//Runs the Main Game Code
+var play = function(event){
+
+	var cell = event.target;
+
+	takeTurn(cell);
+
+	detectWin();
 	playerTurn++;
+}
 
-//	var checkForWinner = function() {
-//		if (playerTurn - 1) % 2 === 0 {
-			//alert or console log 'you are the winner'
-//		}
-	// checkforwinner()
+var takeTurn = function (thisCell){
+	if (playerTurn % 2 === 0) {
+		thisCell.innerHTML = "<p>O</p>";
+		// Disable mouse click for this cell. This cell is no longer active
+      	thisCell.onmousedown = null;
+	} else {
+		thisCell.innerHTML = "<p>X</p>";
+		// Disable mouse click for this cell. This cell is no longer active
+      thisCell.onmousedown = null;
+	} 
+	
 
-};
-
-$('.cell').on('click', takeTurn);
-
-// line go through 3 winning
+}
 
 
-var takeTurn = function() {
-  if (this.innerHTML == "&nbsp;" ) {
-    if (playerTurn % 2 == 0) {
-      this.textContent = "X";
-    } else {
-      this.textContent = "0";
-    }
-    playerTurn++;
-  }
-};
-
+// Checks whether current player has 3 in a row anywhere on board.
 
 var detectWin = function () {
 
-// $('#cell-1x3').html() === $('#cell-1x1').html() && $('#cell-1x2').html() === $('#cell-1x1').html()
+		//Checks top row
+		if ($('#cell-1x3')[0].innerHTML === $('#cell-1x1')[0].innerHTML && $('#cell-1x2')[0].innerHTML === $('#cell-1x1')[0].innerHTML && ($('#cell-1x1')[0].innerHTML !== "&nbsp;")){
+			$('#cell-1x3')[0].style.backgroundColor = "red";
+			$('#cell-1x2')[0].style.backgroundColor = "red";
+			$('#cell-1x1')[0].style.backgroundColor = "red";
+		}
 
-	window.alert("Game won. Please reset the game.");
+		// Middle row
+		else if($('#cell-2x3')[0].innerHTML === $('#cell-2x1')[0].innerHTML && $('#cell-2x2')[0].innerHTML === $('#cell-2x1')[0].innerHTML && ($('#cell-2x1')[0].innerHTML !== "&nbsp;")){
+			$('#cell-2x3')[0].style.backgroundColor = "red";
+			$('#cell-2x2')[0].style.backgroundColor = "red";
+			$('#cell-2x1')[0].style.backgroundColor = "red";
+		}
+
+		// Middle vertical row
+		else if($('#cell-1x2')[0].innerHTML === $('#cell-2x2')[0].innerHTML && $('#cell-3x2')[0].innerHTML === $('#cell-2x2')[0].innerHTML && ($('#cell-2x2')[0].innerHTML !== "&nbsp;")){
+			$('#cell-1x2')[0].style.backgroundColor = "red";
+			$('#cell-2x2')[0].style.backgroundColor = "red";
+			$('#cell-3x2')[0].style.backgroundColor = "red";
+		}
+		//Vertical Left
+		else if($('#cell-1x1')[0].innerHTML === $('#cell-2x1')[0].innerHTML && $('#cell-2x1')[0].innerHTML === $('#cell-3x1')[0].innerHTML && ($('#cell-3x1')[0].innerHTML !== "&nbsp;")){
+			$('#cell-1x1')[0].style.backgroundColor = "red";
+			$('#cell-2x1')[0].style.backgroundColor = "red";
+			$('#cell-3x1')[0].style.backgroundColor = "red";
+		}
+		// Bottom row
+		else if($('#cell-3x1')[0].innerHTML === $('#cell-3x2')[0].innerHTML && $('#cell-3x1')[0].innerHTML === $('#cell-3x3')[0].innerHTML && ($('#cell-3x3')[0].innerHTML !== "&nbsp;")){
+			$('#cell-3x1')[0].style.backgroundColor = "red";
+			$('#cell-3x2')[0].style.backgroundColor = "red";
+			$('#cell-3x3')[0].style.backgroundColor = "red";
+		}
+		// Diag left
+		else if($('#cell-1x1')[0].innerHTML === $('#cell-2x2')[0].innerHTML && $('#cell-3x3')[0].innerHTML === $('#cell-1x1')[0].innerHTML && ($('#cell-1x1')[0].innerHTML !== "&nbsp;")){
+			$('#cell-3x3')[0].style.backgroundColor = "red";
+			$('#cell-2x2')[0].style.backgroundColor = "red";
+			$('#cell-1x1')[0].style.backgroundColor = "red";
+		}
+
+	// Vertical right
+		else if($('#cell-1x3')[0].innerHTML === $('#cell-2x3')[0].innerHTML && $('#cell-2x3')[0].innerHTML === $('#cell-3x3')[0].innerHTML && ($('#cell-3x3')[0].innerHTML !== "&nbsp;")){
+			$('#cell-1x3')[0].style.backgroundColor = "red";
+			$('#cell-2x3')[0].style.backgroundColor = "red";
+			$('#cell-3x3')[0].style.backgroundColor = "red";
+		}
+		//Diag Right
+		else if($('#cell-3x1')[0].innerHTML === $('#cell-2x2')[0].innerHTML && $('#cell-2x2')[0].innerHTML === $('#cell-1x3')[0].innerHTML && ($('#cell-1x3')[0].innerHTML !== "&nbsp;")){
+			$('#cell-3x1')[0].style.backgroundColor = "red";
+			$('#cell-2x2')[0].style.backgroundColor = "red";
+			$('#cell-1x3')[0].style.backgroundColor = "red";
+		}
+		else{
+			return;
+		}
+
+
+		//vertical middle row not changing to red
+
+		var winningPlayer;
+
+		if( (playerTurn % 2) === 0){
+			winningPlayer = "0";
+		}
+		else{
+			winningPlayer = "X";
+		}
+
+		window.alert( winningPlayer + " won. Please reset the game.");
 };
 
 
-var resetBoard = $(".button").click(function () {
-    $(".cell").text("");
-    // resets the board by deleting the x and o's on the board
-});
+// Scorebard
 
+// text-decoration:line-through;
 
+/*    {
+        window.alert("Tile is in use. Please select another tile."); */
 
-
-
-// };
-
-
-// var markCell = function() {
-	
-// };
-
-
-
-
-
-
-// // Inline block images
-// // 3 rows
-
-
-
-
-// // Tic Tac Toe
-
-
-
-
-// var currentPlayer =
-
-// var tile = [images];
-
-// var tile.checkClick = function () {
-// 	if (this.isClicked) ()) 
-// }
-
-// // Determines which square was clicked
-
-// var checkClick = $('.board').on('click', '.tile', function(event) {
-//   // When a square is clicked the function receives a jQuery event object as a parameter
-//   var $tile = $(event.currentTarget);
-// }); // event.currentTarget is used to find the DOM element that was clicked on and stores it as a variable.
-
-
-
-// // Update the board to fill the square with the 'X' or 'O' image.
-
-// var updateBoard = function(event) {
-
-// 	$('.board').on('click', '.tile') {
-
-//   	var $tile = $(event.currentTarget);
-//   	$tile.addClass('tile-x');
-// 	});
-// 	// Makes a square appear as selected by player 'X' by adding the class .square-x to the square (.addClass).
-// }
-
-
-
-
-// // Check whether a winning combination has been played
-
-// winningCombos = [[0,1,2],[3,4,5]]
-// //REVISIT ME PLZ :)
-
-// winningCombos = new Array 
-// 	new Array (0, 1, 2),
-// 	new Array (3, 4, 5),
-// 	new Array (6, 7, 8),
-// 	new Array (0, 3, 6),
-// 	new Array (1, 4, 7),
-// 	new Array (2, 5, 8),
-// 	new Array (0, 4, 8),
-// 	new Array (2, 4, 6),
-
-// var checkWinner = function {
-
-// }
-
-// // 
-// var playerTurn = (0);
-// var moved = [[]]
-// function init() {   
-//   var cells = document.getElementsByClassName("cell");
-//   for (var i in cells) {
-//     cells[i].onclick = takeTurn;
-//   }
-// }
-
-// //
-
-// function takeTurn() {
-//   if (this.innerHTML == "&nbsp;" ) {
-//     if (playerTurn % 2 == 0) {
-//       this.textContent = "X";
-//     } else {
-//       this.textContent = "0";
-//     }
-//     playerTurn++;
-//   }
-// }
-
-
-// // index of current player-1
-
-
-// // Clear the board and start a new game:
-
-// function clear_board() {
-
-//     var cells = document.getElementsByClassName("cell");
-//     for (var i in cells) {
-//         cells[i].innerHTML = "&nbsp";
-//     }
-// }
 
