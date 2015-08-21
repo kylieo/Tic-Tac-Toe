@@ -30,7 +30,7 @@ function resetBoard(){
 
 }
 
-//Runs the Main Game Code
+//Runs the main game code
 var play = function(event){
 
 	var cell = event.target;
@@ -116,8 +116,6 @@ var detectWin = function () {
 		}
 
 
-		//vertical middle row not changing to red
-
 		var winningPlayer;
 
 		if( (playerTurn % 2) === 0){
@@ -131,11 +129,9 @@ var detectWin = function () {
 };
 
 
-// Scorebard
 
-// text-decoration:line-through;
 
-/*    {
-        window.alert("Tile is in use. Please select another tile."); */
+
+
 
 
