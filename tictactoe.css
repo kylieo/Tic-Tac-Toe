@@ -36,7 +36,8 @@ body {
 
      background-color:white;
      width: 160px;
-     margin: 60 93 auto;
+     margin: 60 60 93 auto;
+     text-align: center;
      font-color:black;
 }
 
