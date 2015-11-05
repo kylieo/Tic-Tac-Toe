@@ -44,7 +44,8 @@ body {
 button {
 	
     float: left;
-    margin-top: 2 cm;
+    margin: 60 60 93 auto;
+    text-align: center;
     color:black;
 }
 
