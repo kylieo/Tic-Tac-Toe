@@ -41,7 +41,9 @@ body {
 }
 
 button {
+	
     float: left;
+    margin: 60 px;
     color:black;
 }
 
